@@ -31,3 +31,17 @@ body {
     text-wrap: balance;
   }
 }
+
+/* Custom */
+.custom-dark-high{
+  background-color: #08090F;
+}
+.custom-dark-low{
+  background-color: #191728;
+}
+.custom-purple-high{
+  background-color: #431484;
+}
+.custom-purple-low{
+  background-color: #752EF0;
+}

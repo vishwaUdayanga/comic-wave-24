@@ -3,8 +3,8 @@ import Image from "next/image";
 
 export default function Header() {
     return (
-        <div className="flex p-4 justify-center bg-slate-950">
-            <div className="flex justify-between md:w-4/5">
+        <div className="flex p-4 justify-center custom-dark-low">
+            <div className="flex w-full justify-between md:w-4/5">
                 <div className="flex align-middle gap-4">
                     <Image
                         src={'/header/header-logo.png'}
@@ -13,7 +13,7 @@ export default function Header() {
                         height={130}
                     />
                     <div className="flex gap-4 items-center">  
-                        <div className="w-fit rounded bg-slate-800 p-2 border border-slate-600 flex gap-1">
+                        <div className="w-fit rounded bg-slate-800 p-2 border border-slate-600 gap-1 hidden sm:flex">
                             <Image 
                                 src={'/header/ticket-premium.jpg'}
                                 alt={'Ticket | Premium'}
@@ -27,8 +27,12 @@ export default function Header() {
                                 height={50}
                             />
                         </div>
-                        <p className="text-xs">Ticket price | <Link href={'/'}>Regular - LKR 600</Link> | <Link href={'/'}>Premium - LKR 800</Link></p>
+                        <p className="text-xs hidden lg:block">Ticket price | <Link href={'/'}>Regular - LKR 600</Link> | <Link href={'/'}>Premium - LKR 800</Link></p>
                     </div>
+                </div>
+                <div className="flex gap-3 items-center">
+                    <Link href={'/'} className="pl-4 pr-4 pb-1 pt-1 bg-slate-800 border-slate-600 border text-xs rounded">Log In</Link>
+                    <Link href={'/'} className="pl-4 pr-4 pb-1 pt-1 custom-purple-low text-xs rounded hidden md:block">Sign Up</Link>
                 </div>
             </div>
         </div>
