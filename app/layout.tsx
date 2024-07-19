@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Header from "@/app/ui/header"
+import Login_Form from "@/app/ui/login-form"
+import Login_Sign_In from "@/app/ui/login-sign-in"
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -19,6 +21,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Header />
+
+  <Login_Form />
+  <Login_Sign_In />
         <div className="flex justify-center">
           <div className="md:w-11/12 p-4">
             <div>{children}</div>
