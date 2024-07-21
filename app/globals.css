@@ -34,7 +34,7 @@ body {
 
 /* Custom */
 .custom-dark-high{
-  background-color: #08090F;
+  background-color: #0B0C15;
 }
 .custom-dark-low{
   background-color: #191728;
@@ -44,4 +44,12 @@ body {
 }
 .custom-purple-low{
   background-color: #752EF0;
+}
+.regular-gradient{
+  background: rgb(11,12,21);
+  background: linear-gradient(90deg, rgba(11,12,21,1) 0%, rgba(121,53,240,0.5858718487394958) 62%, rgba(11,12,21,1) 100%);
+}
+.premium-gradient{
+  background: rgb(11,12,21);
+  background: linear-gradient(90deg, rgba(11,12,21,1) 0%, rgba(255,0,10,0.6783088235294117) 29%, rgba(11,12,21,1) 100%);
 }

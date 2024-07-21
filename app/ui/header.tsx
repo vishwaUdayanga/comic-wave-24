@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Header() {
     return (
-        <div className="flex p-4 justify-center custom-dark-low">
+        <div className="flex p-4 justify-center custom-dark-low w-full">
             <div className="flex w-full justify-between md:w-4/5">
                 <div className="flex align-middle gap-4">
                     <Image
