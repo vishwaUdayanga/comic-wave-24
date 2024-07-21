@@ -2,6 +2,16 @@ import { url } from "inspector";
 import Image from "next/image";
 import Link from "next/link";
 import TicketTypes from "./ui/main-page/ticket-types";
+import { Metadata } from 'next';
+ 
+export const metadata: Metadata = {
+  title: 'Comic Wave 24',
+  description: 'The official web page for comic-con 24',
+  openGraph: {
+    images: '/main/ogImg.png',
+  },
+  metadataBase: new URL('https://comic-wave-24.vercel.app/'),
+};
 
 export default function Home() {
   return (
