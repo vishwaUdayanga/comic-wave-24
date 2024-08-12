@@ -32,7 +32,7 @@ export default function Header() {
                 </div>
                 <div className="flex gap-3 items-center">
                     <Link href={'/'} className="pl-4 pr-4 pb-1 pt-1 bg-slate-800 border-slate-600 border text-xs rounded">Log In</Link>
-                    <Link href={'/'} className="pl-4 pr-4 pb-1 pt-1 custom-purple-low text-xs rounded hidden md:block">Sign Up</Link>
+                    <Link href={'/signup'} className="pl-4 pr-4 pb-1 pt-1 custom-purple-low text-xs rounded hidden md:block">Sign Up</Link>
                 </div>
             </div>
         </div>
