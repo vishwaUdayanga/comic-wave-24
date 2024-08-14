@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { State, createStudent } from '../lib/actions';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signUpSchema } from "./../lib/zod-schemas";
+import { createStudent, IncomingState } from "../lib/actions";
+import { useState, useEffect } from "react";
 import { z } from 'zod';
 
 type FormValues = z.infer<typeof signUpSchema>;
@@ -23,8 +24,26 @@ export default function Signup() {
         }
     });
 
-    const onSubmit = (data: FormValues) => {
+    const [state, setState] = useState<IncomingState>({
+        error: null,
+        message: null
+    })
+
+    useEffect(() => {
+        console.log(state)
+    }, [state])
+
+    
+
+    const onSubmit = async (data: FormValues) => {
         console.log(data);
+
+        try {
+            const newState = await createStudent(state, data);
+            setState(newState)
+        } catch (error) {
+            console.log('Error creating student')
+        }
     };
 
     return (

@@ -1,89 +1,80 @@
 'use server';
 
-import { z } from 'zod'
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { FieldError } from 'react-hook-form';
+import { FormValuesRegistration } from './types';
+import prisma from './prisma';
+import { hash } from 'bcrypt'
+import { randomUUID } from 'crypto'
+import Mailgun from 'mailgun.js';
+import formDataTemp from 'form-data'
+import mailjet from './mailjet';
 // import { signIn } from '@/auth';
 // import { AuthError } from 'next-auth';
- 
-const FormSchema = z.object({
-//   id: z.string(),
-  registration_number: z
-    .string({
-      invalid_type_error: 'Please enter your registration number.',
-    })
-    .min(10, 'Please enter a valid number')
-    .max(10, 'Please enter a valid number'),
-  email: z
-    .string({
-      invalid_type_error: 'Please enter your email.',
-    })
-    .email('Pleas enter a valid email.'),
-  name: z
-    .string({
-      invalid_type_error: 'Please enter your name.',
-    })
-    .max(50, 'Name is too long.'),
-  password: z
-    .string({
-      invalid_type_error: 'Please enter your password.',
-    })
-    .min(10, 'Password must be at least 10 characters')
-    .max(100),
-  confirm_password: z
-    .string({
-      invalid_type_error: 'Please enter your password.',
-    })
-    .min(10, 'Password must be at least 10 characters')
-    .max(100)
-})
-.refine((data) => data.password === data.confirm_password, {
-  message: "Passwords don't match",
-  path: ["confirm_password"],
-})
 
- 
-// const CreateStudent = FormSchema.omit({ id: true });
 
-export type State = {
-  errors?: {
-    registration_number?: string[];
-    email?: string[];
-    name?: string[];
-    password?: string[];
-    confirm_password?: string[];
-  };
-  message?: string | null;
-};
+export type IncomingState = {
+  error?: String | null,
+  message?: String | null
+}
 
-export async function createStudent(prevState: State, formData: FormData) {
-    const validatedFields = FormSchema.safeParse({
-        registration_number: formData.get('registration_number'),
-        email: formData.get('email'),
-        name: formData.get('name'),
-        password: formData.get('password'),
-        confirm_password: formData.get('confirm_password')
-    });
+const API_KEY = process.env.MAILGUN_API_KEY || ''
+const DOMAIN = process.env.MAILGUN_DOMAIN || ''
+const WEB_DOMAIN = process.env.DOMAIN || ''
 
-    if (!validatedFields.success) {
-      return {
-        errors: validatedFields.error.flatten().fieldErrors,
-        message: 'Missing Fields. Failed to Create student.',
-      };
+// export async function createStudent(prevState: State, formData: FormData)
+
+export async function createStudent(prevState: IncomingState, formData: FormValuesRegistration) {
+    const password = await hash(formData.password as string, 12);
+
+    const student = await prisma.student.create({
+      data: {
+          registrationNumber: formData.registration_number as string,
+          email: formData.email as string,
+          name: formData.name as string,
+          password: password as string
+      }
+    })
+
+    const token = await prisma.activateToken.create({
+      data: {
+        token: `${randomUUID()}${randomUUID()}`.replace(/-/g, ''),
+        studentId: student.id
+      }
+    })
+
+    try {
+      const request = mailjet
+        .post('send', { version: 'v3.1' })
+        .request({
+          Messages: [
+            {
+              From: {
+                Email: 'vishwaudayanga310@gmail.com',
+                Name: 'Vishwa Udayanga',
+              },
+              To: [
+                {
+                  Email: student.email,
+                },
+              ],
+              Subject: 'Email verification for COMIC-WAVE-24',
+              TextPart: `Hello ${student.name}, Please activate your account by clicking this link : ${WEB_DOMAIN}/activate/${token.token}`,
+            },
+          ],
+        });
+
+      const result = await request;
+    } catch (error) {
+      console.log('Could not send the email : ', error)
     }
-    
-    const { registration_number, email, name, password, confirm_password } = validatedFields.data;
 
-    console.log(registration_number);
 
-    // try {
-    //   await sql`
-    //   INSERT INTO students (registration_number, email, name, password)
-    //   VALUES (${registration_number}, ${email}, ${name}, ${password})
-    //   `;  
-    // } catch (error) {
-    //   return { message: 'Database error: Failed to create invoice' };
-    // }
+    return {
+      error: null,
+      message: 'User created successfully'
+    }
     
     revalidatePath('/dashboard/login'); // For example
     redirect('/dashboard/login'); //For example
