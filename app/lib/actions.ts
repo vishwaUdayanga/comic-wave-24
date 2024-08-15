@@ -7,7 +7,6 @@ import { FormValuesRegistration } from './types';
 import prisma from './prisma';
 import { hash } from 'bcrypt'
 import { randomUUID } from 'crypto'
-import Mailgun from 'mailgun.js';
 import formDataTemp from 'form-data'
 import mailjet from './mailjet';
 // import { signIn } from '@/auth';
@@ -19,15 +18,13 @@ export type IncomingState = {
   message?: String | null
 }
 
-const API_KEY = process.env.MAILGUN_API_KEY || ''
-const DOMAIN = process.env.MAILGUN_DOMAIN || ''
 const WEB_DOMAIN = process.env.DOMAIN || ''
 
 // export async function createStudent(prevState: State, formData: FormData)
 
 export async function createStudent(prevState: IncomingState, formData: FormValuesRegistration) {
     const password = await hash(formData.password as string, 12);
-
+    
     const student = await prisma.student.create({
       data: {
           registrationNumber: formData.registration_number as string,
@@ -64,18 +61,25 @@ export async function createStudent(prevState: IncomingState, formData: FormValu
             },
           ],
         });
-
-      const result = await request;
     } catch (error) {
-      console.log('Could not send the email : ', error)
+      await prisma.activateToken.delete({
+        where: {token: token.token}
+      })
+      await prisma.student.delete({
+        where: {id: student.id}
+      })      
+      return {
+        error: 'Email error',
+        message: 'Please provide a correct email.'
+      }
     }
 
 
     return {
       error: null,
-      message: 'User created successfully'
+      message: 'Success'
     }
     
-    revalidatePath('/dashboard/login'); // For example
-    redirect('/dashboard/login'); //For example
+    // revalidatePath('/dashboard/login'); // For example
+    // redirect('/dashboard/login'); //For example
 }

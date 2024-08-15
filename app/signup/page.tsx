@@ -7,7 +7,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { signUpSchema } from "./../lib/zod-schemas";
 import { createStudent, IncomingState } from "../lib/actions";
 import { useState, useEffect } from "react";
-import { z } from 'zod';
+import { string, z } from 'zod';
+import { stat } from "fs";
 
 type FormValues = z.infer<typeof signUpSchema>;
 
@@ -29,20 +30,46 @@ export default function Signup() {
         message: null
     })
 
+    const [message, setMessage] = useState({
+        student_error: '',
+        email_error: ''
+    })
+
     useEffect(() => {
-        console.log(state)
+        if (state.error == 'Student error') {
+            setMessage(prev => ({
+                ...prev,
+                student_error: 'Either registration number or email is already taken.'
+            }))
+        } else if (state.error == 'Email error') {
+            setMessage(prev => ({
+                ...prev,
+                email_error: 'Please provide a correct email.'
+            }))
+        }
     }, [state])
 
     
 
     const onSubmit = async (data: FormValues) => {
-        console.log(data);
-
         try {
             const newState = await createStudent(state, data);
             setState(newState)
+
+            if (newState.error == 'Email error') {
+                setState({
+                    error: 'Email error',
+                    message: 'Please provide a correct email.'
+                })
+            }
+            if (newState.message == 'Success') {
+                alert('We have sent an verification email. Please active your account using that link.')
+            }
         } catch (error) {
-            console.log('Error creating student')
+            setState({
+                error: 'Student error',
+                message: 'Either registration number or email is already taken.'
+            })
         }
     };
 
@@ -89,6 +116,17 @@ export default function Signup() {
                                     </>
                                 )}
                             />
+                            {message.student_error &&
+                                <div className="flex gap-2 items-center mt-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#CD3C16" className="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                        <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/>
+                                    </svg>
+                                    <p className="text-red-600 text-sm">{message.student_error}</p>
+                                </div>
+                            }
+                            
+                            
                         </div>
                         <div className="mb-4">
                             <label htmlFor="email" className="block text-gray-400 mb-2 text-sm sm:text-base">
@@ -124,6 +162,15 @@ export default function Signup() {
                                     </>
                                 )}
                             />
+                            {message.email_error &&
+                                <div className="flex gap-2 items-center mt-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#CD3C16" className="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                        <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/>
+                                    </svg>
+                                    <p className="text-red-600 text-sm">{message.email_error}</p>
+                                </div>
+                            }
                         </div>
                         <div className="mb-4">
                             <label htmlFor="name" className="block text-gray-400 mb-2 text-sm sm:text-base">
