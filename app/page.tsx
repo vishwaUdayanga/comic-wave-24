@@ -2,20 +2,13 @@ import { url } from "inspector";
 import Image from "next/image";
 import Link from "next/link";
 import TicketTypes from "./ui/main-page/ticket-types";
-import { Metadata } from 'next';
+import Header from "@/app/ui/header"
  
-export const metadata: Metadata = {
-  title: 'Comic Wave 24',
-  description: 'The official web page for comic-con 24',
-  openGraph: {
-    images: '/main/ogImg.png',
-  },
-  metadataBase: new URL('https://comic-wave-24.vercel.app/'),
-};
 
-export default function Home() {
+export default async function Home() {
   return (
     <>
+      <Header />
       <main className="flex flex-col items-center bg-cover bg-center mt-0 overflow-hidden z-10" style={{backgroundImage : "url('/main/main-bg.png')"}}>
         <Image 
           src={'/main/logo.png'}

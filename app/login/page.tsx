@@ -32,12 +32,12 @@ export default function Login() {
         var password = data.password;
         const result = await signIn("credentials", {
             redirect: false,
-            registrationNumber,
-            password,
+            registration_number: registrationNumber,
+            password: password,
         });
 
         if (result?.error) {
-            console.log('Could not login');
+            alert('Enter correct credentials.')
         } else {
             window.location.href = "/";
         }
