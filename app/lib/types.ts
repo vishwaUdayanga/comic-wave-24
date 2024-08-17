@@ -11,3 +11,7 @@ export type FormValuesLogin = {
     password: string;
 }
 
+export type Uploads = {
+    file: FileList
+}
+

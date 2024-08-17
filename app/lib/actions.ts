@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { FieldError } from 'react-hook-form';
-import { FormValuesRegistration } from './types';
+import { FormValuesRegistration, Uploads } from './types';
 import prisma from './prisma';
 import { hash } from 'bcrypt'
 import { randomUUID } from 'crypto'
@@ -82,4 +82,11 @@ export async function createStudent(prevState: IncomingState, formData: FormValu
     
     // revalidatePath('/dashboard/login'); // For example
     // redirect('/dashboard/login'); //For example
+}
+
+export async function uploadFileRegular(prevState: IncomingState, formData: Uploads) {
+  return {
+    error: null,
+    message: 'Success'
+  }
 }

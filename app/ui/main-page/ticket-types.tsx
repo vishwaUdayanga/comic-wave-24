@@ -10,7 +10,7 @@ export default function TicketTypes() {
             <p className="text-sm mt-1 text-center text-slate-400 z-10">Buy online now easily</p>
             <div className="flex justify-between md:w-4/5">
                 <div className="flex flex-col md:flex-row w-full justify-center gap-8 mt-6">
-                    <Link className="w-fit" href={'/'}>
+                    <Link className="w-fit" href={'/tickets/ticket_regular'}>
                         <Image 
                             src={'/ticket-types/regular.jpg'}
                             alt={'Ticket Types | Regular'}

@@ -2,13 +2,12 @@ import { url } from "inspector";
 import Image from "next/image";
 import Link from "next/link";
 import TicketTypes from "./ui/main-page/ticket-types";
-import Header from "@/app/ui/header"
+
  
 
 export default async function Home() {
   return (
     <>
-      <Header />
       <main className="flex flex-col items-center bg-cover bg-center mt-0 overflow-hidden z-10" style={{backgroundImage : "url('/main/main-bg.png')"}}>
         <Image 
           src={'/main/logo.png'}
