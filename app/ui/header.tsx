@@ -7,12 +7,6 @@ import { authOptions } from './../utils/authOptions';
 
 export default async function Header() {
     const session = await getServerSession(authOptions);
-    // const handleLogout = async () => {
-    //     await signOut({
-    //       redirect: false,
-    //     });
-    //     window.location.href = "/";
-    // };
     return (
         <div className="flex p-4 justify-center custom-dark-low w-full">
             <div className="flex w-full justify-between md:w-4/5">
