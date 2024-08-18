@@ -42,7 +42,7 @@ export async function createStudent(prevState: IncomingState, formData: FormValu
     })
 
     try {
-      const request = mailjet
+      const request = await mailjet
         .post('send', { version: 'v3.1' })
         .request({
           Messages: [
