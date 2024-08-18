@@ -25,6 +25,9 @@ model Student {
   updatedAt DateTime @updatedAt
 
   ActivateToken ActivateToken[]
+  Uploads Uploads[]
+  Bought Bought[]
+  Issued Issued[]
 }
 
 model ActivateToken {
@@ -43,5 +46,32 @@ model User {
   email             String   @unique
   hashedPassword    String
   registrationNumber String
+}
+
+model Uploads {
+  id Int @id @default(autoincrement())
+  student Student @relation(fields: [studentId], references: [registrationNumber])
+  studentId String @unique
+  type Int
+  verified Boolean @default(false)
+}
+
+model Bought {
+  id Int @id @default(autoincrement())
+  student Student @relation(fields: [studentId], references: [registrationNumber])
+  studentId String @unique
+  type Int
+  date DateTime @default(now())
+  issued Boolean @default(false) 
+  Issued Issued[]
+}
+
+model Issued {
+  id Int @id @default(autoincrement())
+  student Student @relation(fields: [studentId], references: [registrationNumber])
+  studentId String
+  date DateTime @default(now())
+  ticket Bought @relation(fields: [ticketId], references: [id])
+  ticketId Int
 }
 
