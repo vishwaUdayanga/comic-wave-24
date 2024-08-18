@@ -1,7 +1,7 @@
 import NextAuth, { type NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import prisma from '../../../lib/prisma';
-// import bcrypt from 'bcrypt'
+import bcrypt from 'bcrypt'
 
 export const authOptions: NextAuthOptions = {
     session: {
@@ -20,14 +20,10 @@ export const authOptions: NextAuthOptions = {
           const user = await prisma.student.findUnique({
             where: { registrationNumber: credentials.registration_number },
           });
-
-          if (user) {
-            return { id: user.id.toString(), name: user.name , email: user.email, registrationNumber: user.registrationNumber };
-          }
   
-        //   if (user && await bcrypt.compare(credentials.password, user.password)) {
-        //     return { id: user.id.toString(), email: user.email, registrationNumber: user.registrationNumber };
-        //   }
+          if (user && await bcrypt.compare(credentials.password, user.password)) {
+            return { id: user.id.toString(), name: user.name, email: user.email, registrationNumber: user.registrationNumber };
+          }
           
   
           return null;
