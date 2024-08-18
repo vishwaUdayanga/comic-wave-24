@@ -37,19 +37,35 @@ export const signInSchema = z.object({
     .max(100, { message: 'Message is too long.'}),
 });
 
+// export const uploadFileSchema = z.object({
+//   file: z.instanceof(FileList).refine(fileList => fileList.length > 0, {
+//     message: 'You must select a file',
+//   }).refine(fileList => {
+//     const file = fileList[0];
+//     return file ? file.size < 5000000 : false; // 5MB limit
+//   }, {
+//     message: 'File size should be less than 5MB',
+//   }).refine(fileList => {
+//     const file = fileList[0];
+//     return file ? ['image/png'].includes(file.type) : false; // Allowed types
+//   }, {
+//     message: 'Only PNG images are allowed',
+//   }),
+// });
+
 export const uploadFileSchema = z.object({
-  file: z.instanceof(FileList).refine(fileList => fileList.length > 0, {
-    message: 'You must select a file',
-  }).refine(fileList => {
-    const file = fileList[0];
-    return file ? file.size < 5000000 : false; // 5MB limit
-  }, {
-    message: 'File size should be less than 5MB',
-  }).refine(fileList => {
-    const file = fileList[0];
-    return file ? ['image/png'].includes(file.type) : false; // Allowed types
-  }, {
-    message: 'Only PNG images are allowed',
-  }),
+  file: z.any().refine((fileList: FileList) => fileList.length > 0, {
+      message: 'You must select a file',
+    }).refine((fileList: FileList) => {
+      const file = fileList[0];
+      return file ? file.size < 5000000 : false; // 5MB limit
+    }, {
+      message: 'File size should be less than 5MB',
+    }).refine((fileList: FileList) => {
+      const file = fileList[0];
+      return file ? ['image/png'].includes(file.type) : false; // Allowed types
+    }, {
+      message: 'Only PNG images are allowed',
+    }),
 });
     
