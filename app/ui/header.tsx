@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import Logout from "./logout";
+import { authOptions } from './../utils/authOptions';
 
 
 export default async function Header() {

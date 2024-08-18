@@ -2,8 +2,8 @@ import { writeFile } from "fs/promises";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import { join } from "path";
-import { authOptions } from "../auth/[...nextauth]/route";
 import prisma from "@/app/lib/prisma";
+import { authOptions } from './../../utils/authOptions';
 
 export async function POST(request: NextRequest) {
     const session = await getServerSession(authOptions);
