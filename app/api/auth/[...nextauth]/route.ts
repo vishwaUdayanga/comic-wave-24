@@ -38,10 +38,10 @@ export const authOptions: NextAuthOptions = {
             // For JWT strategy, use the token object
             if (token) {
               session.user = {
-                id: token.id,
-                name: token.name,
-                email: token.email,
-                registrationNumber: token.registrationNumber, // Ensure this is added
+                id: token.id as string,
+                name: token.name as string,
+                email: token.email as string,
+                registrationNumber: token.registrationNumber as string, // Ensure this is added
               };
             }
             return session;
