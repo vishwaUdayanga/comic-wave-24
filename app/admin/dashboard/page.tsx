@@ -10,8 +10,8 @@ export default async function Dashboard() {
     }
 
     return (
-        <div className='flex items-center flex-col justify-center'>
-            <h1 className='text-4xl text-indigo-500 font-bold mt-6 text-center'>Admin Dashboard</h1>
+        <div className='min-h-screen flex items-center flex-col justify-center'>
+            <h1 className='text-4xl text-indigo-500 font-bold text-center'>Admin Dashboard</h1>
             <div className='flex justify-center items-center flex-wrap gap-4 mt-10'>
                 <Link className="w-fit" href={'/admin/uploads'}>
                     <div className='p-5 border rounded border-current'>
