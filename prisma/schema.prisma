@@ -54,6 +54,7 @@ model Uploads {
   studentId String @unique
   type Int
   verified Boolean @default(false)
+  fileUrl String
 }
 
 model Bought {

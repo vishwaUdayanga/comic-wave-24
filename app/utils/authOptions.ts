@@ -2,6 +2,10 @@ import type { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import prisma from '../lib/prisma';
 import bcrypt from 'bcrypt'
+import mailjet from '../lib/mailjet';
+import { randomUUID } from 'crypto'
+
+const WEB_DOMAIN = process.env.DOMAIN || ''
 
 export const authOptions: NextAuthOptions = {
     session: {
@@ -20,8 +24,54 @@ export const authOptions: NextAuthOptions = {
           const user = await prisma.student.findUnique({
             where: { registrationNumber: credentials.registration_number },
           });
+
+          if (!user) {
+            return null;
+          }
+
+          if (!user.active) {
+            const token = await prisma.activateToken.findFirst({
+              where: {
+                studentId: user.id,
+                createdAt: {
+                  gt: new Date(Date.now() - 24*60*60*1000)
+                }
+              }
+            })
+            if (!token) {
+              const token = await prisma.activateToken.create({
+                data: {
+                  token: `${randomUUID()}${randomUUID()}`.replace(/-/g, ''),
+                  studentId: user.id
+                }
+              })
+              try {
+                const request = await mailjet
+                  .post('send', { version: 'v3.1' })
+                  .request({
+                    Messages: [
+                      {
+                        From: {
+                          Email: 'vishwaudayanga310@gmail.com',
+                          Name: 'Vishwa Udayanga',
+                        },
+                        To: [
+                          {
+                            Email: user.email,
+                          },
+                        ],
+                        Subject: 'Email verification for COMIC-WAVE-24',
+                        TextPart: `Hello ${user.name}, Please activate your account by clicking this link : ${WEB_DOMAIN}/activate/${token.token}`,
+                      },
+                    ],
+                  });
+              } catch (error) {
+                return null;
+              }
+            }
+          }
   
-          if (user && await bcrypt.compare(credentials.password, user.password)) {
+          if (user && await bcrypt.compare(credentials.password, user.password) && user.active) {
             return { id: user.id.toString(), name: user.name, email: user.email, registrationNumber: user.registrationNumber };
           }
           

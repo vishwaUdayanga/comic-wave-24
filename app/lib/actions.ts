@@ -9,6 +9,9 @@ import { hash } from 'bcrypt'
 import { randomUUID } from 'crypto'
 import formDataTemp from 'form-data'
 import mailjet from './mailjet';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../utils/authOptions';
+import { Message } from 'node-mailjet';
 // import { signIn } from '@/auth';
 // import { AuthError } from 'next-auth';
 
@@ -83,3 +86,58 @@ export async function createStudent(prevState: IncomingState, formData: FormValu
     // revalidatePath('/dashboard/login'); // For example
     // redirect('/dashboard/login'); //For example
 }
+
+// lib/fetchUploads.ts
+
+// lib/fetchUploadsByRegistrationNumber.ts
+
+const ITEMS_PER_PAGE = 10;
+
+export async function fetchUploadsByRegistrationNumber(
+  registrationNumber: string,
+  currentPage: number
+) {
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
+    // Fetch uploads with pagination
+    const whereClause = registrationNumber
+      ? { studentId: registrationNumber } 
+      : {}; 
+
+    const uploads = await prisma.uploads.findMany({
+      where: whereClause,
+      skip: offset,
+      take: ITEMS_PER_PAGE,
+    });
+
+    return uploads;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch uploads.');
+  }
+}
+
+export async function fetchUploads(
+  registrationNumber: string
+) {
+
+  try {
+    // Fetch uploads with pagination
+    const whereClause = registrationNumber
+      ? { studentId: registrationNumber } 
+      : {}; 
+
+    const count = await prisma.uploads.count({
+      where: whereClause,
+    });
+
+    const totalPages = Math.ceil(count / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch uploads.');
+  }
+}
+
+
