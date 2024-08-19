@@ -68,4 +68,11 @@ export const uploadFileSchema = z.object({
       message: 'Only PNG images are allowed',
     }),
 });
+
+export const InvoiceSchema = z.object({
+  invoice_number: z
+    .string({ message: 'Invoice number is required' })
+    .min(5, {message:'Please enter a valid number'})
+    .max(20, {message:'Please enter a valid number'})
+});
     
