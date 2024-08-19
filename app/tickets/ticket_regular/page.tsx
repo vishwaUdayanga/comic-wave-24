@@ -8,6 +8,7 @@ import { string, z } from 'zod';
 import Image from 'next/image';
 import { useState, useEffect } from "react";
 import { FieldError } from 'react-hook-form';
+import { stat } from 'fs';
 
 type FormValues = z.infer<typeof uploadFileSchema>;
 
@@ -30,7 +31,7 @@ export default function Premium() {
         if (state.error == 'Upload error') {
             setMessage(prev => ({
                 ...prev,
-                file_error: 'Could not upload the file'
+                file_error: 'You have already upload. Please visit the admin'
             }))
         }
     }, [state])
@@ -59,6 +60,10 @@ export default function Premium() {
                 window.location.href = '/'
             }
 
+            if (!result.status) {
+                alert('You have already uploaded a file. Please visit the admin.')
+            }
+
             if (!response.ok) {
                 setState({
                     error: 'Upload error',
@@ -72,33 +77,6 @@ export default function Premium() {
             })
         }
     }
-
-    // const onSubmit = async (data: FormValues) => {
-    //     try {
-    //         const file = data.file[0];
-    //         const formData = new FormData();
-    //         formData.append('file', file);
-    //         const newState = await uploadFileRegular(state, { file: data.file });
-    //         setState(newState)
-
-    //         if (newState.error == 'Upload error') {
-    //             setState({
-    //                 error: 'Upload error',
-    //                 message: 'Could not upload the file'
-    //             })
-    //         }
-    //         if (newState.message == 'Success') {
-    //             alert('File uploaded successfully')
-    //             window.location.href = '/'
-    //         }
-    //     } catch (error) {
-    //         console.log(error)
-    //         setState({
-    //             error: 'Upload error',
-    //             message: 'Could not upload the file'
-    //         })
-    //     }
-    // };
     return (
         <>
             <div className="min-h-screen flex items-center justify-center bg-[#08090F]">
@@ -107,7 +85,7 @@ export default function Premium() {
                         Purchase your <span className="text-purple-500">Regular ticket</span>
                     </h1>
                     <Image 
-                            src={'/ticket-types/regular.jpg'}
+                            src={'/ticket-types/premium.jpg'}
                             alt={'Ticket Types | Regular'}
                             width={390}
                             height={390}

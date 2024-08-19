@@ -54,6 +54,15 @@ export default async function Header() {
                         </div>
                     </>
                 )}
+                {(session?.user.registrationNumber == process.env.ADMIN_1) ? (
+                    <div className="flex gap-3 items-center">
+                        <Link href={'/admin/dashboard'} className="pl-4 pr-4 pb-1 pt-1 bg-slate-800 border-slate-600 border text-xs rounded">
+                            Dashboard
+                        </Link>
+                    </div>
+                ) : (
+                    <></>
+                )}
                 
             </div>
         </div>

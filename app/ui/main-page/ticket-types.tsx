@@ -12,24 +12,24 @@ export default function TicketTypes() {
                 <div className="flex flex-col md:flex-row w-full justify-center gap-8 mt-6">
                     <Link className="w-fit" href={'/tickets/ticket_regular'}>
                         <Image 
-                            src={'/ticket-types/regular.jpg'}
+                            src={'/ticket-types/premium.jpg'}
                             alt={'Ticket Types | Regular'}
                             width={500}
                             height={500}
                         />
                         <div className="regular-gradient p-6 text-end mt-0 md:mt-8 flex justify-end">
                             <div className="flex gap-5 mr-10">
+                                <p className="text-sm mt-2 text-slate-400 text-right"><span className="text-xl text-slate-50">LKR 800</span><br />For comic-con and E-sport event</p>
                                 <Image 
                                     src={'/ticket-types/ticket.svg'}
                                     alt={'Ticket Types | Ticket Logo'}
                                     width={30}
                                     height={30}
                                 />
-                                <p className="text-sm mt-2 text-slate-400 text-left"><span className="text-xl text-slate-50">LKR 600</span><br />Only for comic-con</p>
                             </div>
                         </div>
                     </Link>
-                    <Link className="w-fit" href={'/'}>
+                    <Link className="w-fit" href={'/tickets/ticket_last'}>
                         <Image 
                             src={'/ticket-types/regular.jpg'}
                             alt={'Ticket Types | Regular'}

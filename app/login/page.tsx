@@ -37,7 +37,7 @@ export default function Login() {
         });
 
         if (result?.error) {
-            alert('Enter correct credentials.')
+            alert('Enter correct credentials or activate your email address')
         } else {
             window.location.href = "/";
         }
