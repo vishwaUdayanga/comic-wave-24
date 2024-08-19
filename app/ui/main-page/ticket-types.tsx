@@ -5,7 +5,7 @@ import Link from "next/link"
 
 export default function TicketTypes() {
     return (
-        <section className="flex p-1 justify-center items-center custom-dark-high flex-col">
+        <section className="flex p-1 pb-20 justify-center items-center custom-dark-high flex-col">
             <h1 className="text-3xl font-bold -mt-5 z-10 text-center">Ticket <span className="text-violet-600">Types</span></h1>
             <p className="text-sm mt-1 text-center text-slate-400 z-10">Buy online now easily</p>
             <div className="flex justify-between md:w-4/5">

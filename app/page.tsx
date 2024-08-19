@@ -2,7 +2,8 @@ import { url } from "inspector";
 import Image from "next/image";
 import Link from "next/link";
 import TicketTypes from "./ui/main-page/ticket-types";
-
+import ESport from "./ui/main-page/e-sports";
+import About from "./ui/main-page/about";
  
 
 export default async function Home() {
@@ -35,6 +36,8 @@ export default async function Home() {
         />
       </main>
       <TicketTypes />
+      <ESport />
+      <About />
     </>
   );
 }
