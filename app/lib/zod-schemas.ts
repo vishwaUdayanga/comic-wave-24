@@ -76,3 +76,11 @@ export const InvoiceSchema = z.object({
     .max(20, {message:'Please enter a valid number'})
 });
     
+export const StudentVerifySchema = z.object({
+  ticket_number: z
+    .number({ message: 'Ticket number is required' })
+    .int({ message: 'Ticket number must be an integer' })
+    .refine(value => value === 1 || value === 2, {
+      message: 'Ticket number must be either 1 or 2',
+    }),
+});

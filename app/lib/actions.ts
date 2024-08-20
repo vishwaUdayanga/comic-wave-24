@@ -118,6 +118,31 @@ export async function fetchUploadsByRegistrationNumber(
   }
 }
 
+export async function fetchBoughtByRegistrationNumber(
+  registrationNumber: string,
+  currentPage: number
+) {
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
+    // Fetch uploads with pagination
+    const whereClause = registrationNumber
+      ? { studentId: registrationNumber } 
+      : {}; 
+
+    const uploads = await prisma.bought.findMany({
+      where: whereClause,
+      skip: offset,
+      take: ITEMS_PER_PAGE,
+    });
+
+    return uploads;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch uploads.');
+  }
+}
+
 export async function fetchUploads(
   registrationNumber: string
 ) {
@@ -140,6 +165,7 @@ export async function fetchUploads(
   }
 }
 
+
 export async function changeUploadStatus(registrationNumber:string) {
     const update = await prisma.uploads.update({
       where: {
@@ -157,4 +183,119 @@ export async function changeUploadStatus(registrationNumber:string) {
     }
 }
 
+export async function fetchBought(
+  registrationNumber: string
+) {
+
+  try {
+    // Fetch uploads with pagination
+    const whereClause = registrationNumber
+      ? { studentId: registrationNumber } 
+      : {}; 
+
+    const count = await prisma.bought.count({
+      where: whereClause,
+    });
+
+    const totalPages = Math.ceil(count / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch uploads.');
+  }
+}
+
+export async function fetchIssued(
+  registrationNumber: string
+) {
+
+  try {
+    // Fetch uploads with pagination
+    const whereClause = registrationNumber
+      ? { studentId: registrationNumber } 
+      : {}; 
+
+    const count = await prisma.issued.count({
+      where: whereClause,
+    });
+
+    const totalPages = Math.ceil(count / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch uploads.');
+  }
+}
+
+export async function fetchIssuedByRegistrationNumber(
+  registrationNumber: string,
+  currentPage: number
+) {
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
+    // Fetch uploads with pagination
+    const whereClause = registrationNumber
+      ? { studentId: registrationNumber } 
+      : {}; 
+
+    const uploads = await prisma.issued.findMany({
+      where: whereClause,
+      skip: offset,
+      take: ITEMS_PER_PAGE,
+    });
+
+    return uploads;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch uploads.');
+  }
+}
+
+export async function fetchStudents(
+  registrationNumber: string
+) {
+
+  try {
+    // Fetch uploads with pagination
+    const whereClause = registrationNumber
+      ? { registrationNumber: registrationNumber } 
+      : {}; 
+
+    const count = await prisma.student.count({
+      where: whereClause,
+    });
+
+    const totalPages = Math.ceil(count / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch uploads.');
+  }
+}
+
+export async function fetchStudentsByRegistrationNumber(
+  registrationNumber: string,
+  currentPage: number
+) {
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
+    // Fetch uploads with pagination
+    const whereClause = registrationNumber
+      ? { registrationNumber: registrationNumber } 
+      : {}; 
+
+    const students = await prisma.student.findMany({
+      where: whereClause,
+      skip: offset,
+      take: ITEMS_PER_PAGE,
+    });
+
+    return students;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch uploads.');
+  }
+}
 

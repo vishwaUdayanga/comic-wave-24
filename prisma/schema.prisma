@@ -23,6 +23,7 @@ model Student {
   active Boolean @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  verifiedByAdmin Boolean @default(false)
 
   ActivateToken ActivateToken[]
   Uploads Uploads[]

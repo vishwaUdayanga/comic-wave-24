@@ -18,14 +18,19 @@ export default async function Dashboard() {
                         <p className='text-xl'>Payment Uploads</p>
                     </div>   
                 </Link>
-                <Link className="w-fit" href={'/admin/uploads'}>
+                <Link className="w-fit" href={'/admin/bought'}>
                     <div className='p-5 border rounded border-current'>
                         <p className='text-xl'>Bought tickets</p>
                     </div>   
                 </Link>
-                <Link className="w-fit" href={'/admin/uploads'}>
+                <Link className="w-fit" href={'/admin/issued'}>
                     <div className='p-5 border rounded border-current'>
                         <p className='text-xl'>Issued tickets</p>
+                    </div>   
+                </Link>
+                <Link className="w-fit" href={'/admin/verify-students'}>
+                    <div className='p-5 border rounded border-current'>
+                        <p className='text-xl'>Verify students</p>
                     </div>   
                 </Link>
             </div>
