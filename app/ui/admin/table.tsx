@@ -4,9 +4,10 @@ import prisma from '@/app/lib/prisma';
 // import InvoiceStatus from '@/app/ui/invoices/status';
 // import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 // import { fetchFilteredInvoices } from '@/app/lib/data';
-import { fetchUploadsByRegistrationNumber } from '@/app/lib/actions';
+import { fetchUploadsByRegistrationNumber, changeUploadStatus } from '@/app/lib/actions';
 import { students } from '@/app/lib/placeholder-data';
 import Link from 'next/link';
+import Deny from './deny';
 
 export default async function UploadsTable({
   query,
@@ -27,6 +28,15 @@ type Upload = {
     };
 };
   const uploads = await fetchUploadsByRegistrationNumber(query, currentPage);
+
+  const deny = (registrationNumber: string) => {
+    var update = changeUploadStatus(registrationNumber)
+    if (!update) {
+      alert('Could not deny')
+    } else {
+      window.location.href = '/admin/uploads'
+    }
+  }
 
   return (
     <div className="mt-6 flow-root">
@@ -64,6 +74,9 @@ type Upload = {
                 <th scope="col" className="px-3 py-5 font-medium text-white">
                   Slip
                 </th>
+                <th scope="col" className="px-3 py-5 font-medium text-white">
+                  Deny
+                </th>
               </tr>
             </thead>
             <tbody className="">
@@ -86,9 +99,20 @@ type Upload = {
                     }
                   </td>
                   <td className="whitespace-nowrap px-3 py-3 text-white">
-                    <Link href={`/admin/view/${upload.studentId}`} className='pl-4 pr-4 pt-1 pb-1 text-white bg-blue-700 rounded'>
+                    {!upload.verified ? (
+                      <Link href={`/admin/view/${upload.studentId}`} className='pl-4 pr-4 pt-1 pb-1 text-white bg-blue-700 rounded'>
                         View
-                    </Link>
+                      </Link>
+                    ) : (
+                      <></>
+                    )}
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-3 text-white">
+                    {upload.verified ? (
+                      <Deny registrationNumber={upload.studentId} />
+                    ) : (
+                      <></>
+                    )}
                   </td>
                 </tr>
               ))}

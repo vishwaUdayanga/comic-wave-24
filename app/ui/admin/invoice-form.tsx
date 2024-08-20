@@ -26,12 +26,13 @@ export default function InvoiceForm({ registrationNumber }: { registrationNumber
         },
         body: JSON.stringify({
           registrationNumber,
-          invoiceNumber: data.invoice_number,
+          invoiceNumber: data.invoice_number
         }),
       });
       const result = await response.json();
       if (response.ok) {
-        alert('Email sent successfully');
+        alert('Ticket was sent successfully');
+        window.location.href = '/admin/uploads'
       } else {
         alert('Failed to send email');
       }

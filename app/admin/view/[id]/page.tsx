@@ -20,7 +20,7 @@ export default async function View({ params }: { params: { id: string } }) {
         );
     }
 
-    const sasUrl = `${upload.fileUrl}?sv=2022-11-02&ss=bfqt&srt=o&sp=rwdlacupiytfx&se=2024-08-19T21:19:24Z&st=2024-08-19T13:19:24Z&spr=https,http&sig=xMZ5YbkoCfTTaIMXIor3yl8lnlKSfnUibafHzwOVbJ8%3D`;
+    const sasUrl = `${upload.fileUrl}?sp=r&st=2024-08-20T13:59:36Z&se=2024-09-10T21:59:36Z&spr=https&sv=2022-11-02&sr=c&sig=e5o5s7kp66u0B7TuHsCKsS9rpBU1bErzwW8qPOmO%2Bd8%3D`;
 
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#08090F]">

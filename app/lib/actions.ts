@@ -140,4 +140,21 @@ export async function fetchUploads(
   }
 }
 
+export async function changeUploadStatus(registrationNumber:string) {
+    const update = await prisma.uploads.update({
+      where: {
+        studentId: registrationNumber
+      },
+      data: {
+        verified: false
+      }
+    })
+
+    if (!update) {
+      return false
+    } else {
+      return true
+    }
+}
+
 

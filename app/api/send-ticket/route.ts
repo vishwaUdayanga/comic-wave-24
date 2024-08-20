@@ -12,13 +12,47 @@ export async function POST(request: Request) {
       const { registrationNumber, invoiceNumber } = await request.json();
 
     try {
-      // Fetch student email
       const student = await prisma.student.findUnique({
         where: { registrationNumber },
       });
 
       if (!student) {
-        return NextResponse.json({ error: 'Student not found' }, { status: 500 });
+        return NextResponse.json({ error: 'Could not verify', found: false }, { status: 500 });
+      }
+
+      const update = await prisma.uploads.update({
+        where: {
+          studentId: registrationNumber
+        },
+        data: {
+          verified: true
+        }
+      })
+
+      if (!update) {
+        return NextResponse.json({ error: 'Could not verify', found: false }, { status: 500 });
+      }
+
+      const invoice = await prisma.invoice.create({
+        data: {
+          studentId: registrationNumber,
+          invoice_number: invoiceNumber
+        }
+      })
+
+      if (!invoice) {
+        return NextResponse.json({ error: 'Could not verify', found: false }, { status: 500 });
+      }
+
+      const bought = await prisma.bought.create({
+        data : {
+          studentId: registrationNumber,
+          type: 1,
+        }
+      })
+
+      if (!bought) {
+        return NextResponse.json({ error: 'Could not verify', found: false }, { status: 500 });
       }
 
       // Generate PDF
@@ -38,7 +72,7 @@ export async function POST(request: Request) {
             opacity: 1,
           });
       
-          page.drawText(`Ticket number: ${invoiceNumber}`, {
+          page.drawText(`${bought.id}`, {
             x: width - 150, 
             y: 40, 
             size: 12,

@@ -28,6 +28,7 @@ model Student {
   Uploads Uploads[]
   Bought Bought[]
   Issued Issued[]
+  Invoice Invoice[]
 }
 
 model ActivateToken {
@@ -70,9 +71,16 @@ model Bought {
 model Issued {
   id Int @id @default(autoincrement())
   student Student @relation(fields: [studentId], references: [registrationNumber])
-  studentId String
+  studentId String @unique
   date DateTime @default(now())
   ticket Bought @relation(fields: [ticketId], references: [id])
-  ticketId Int
+  ticketId Int @unique
+}
+
+model Invoice {
+  id Int @id @default(autoincrement())
+  student Student @relation(fields: [studentId], references: [registrationNumber])
+  studentId String @unique
+  invoice_number String @unique
 }
 

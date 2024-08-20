@@ -58,13 +58,9 @@ export default function Premium() {
             } else if (result.success) {
                 alert('File uploaded successfully')
                 window.location.href = '/'
-            }
-
-            if (!result.status) {
+            } else if(!result.status) {
                 alert('You have already uploaded a file. Please visit the admin.')
-            }
-
-            if (!response.ok) {
+            } else if (!response.ok) {
                 setState({
                     error: 'Upload error',
                     message: 'Could not upload the file'
