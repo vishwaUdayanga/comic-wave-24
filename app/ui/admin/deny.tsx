@@ -13,10 +13,10 @@ export default function Deny({registrationNumber} : {registrationNumber : string
     
           const result = await response.json();
     
-          if (response.ok && result.success) {
+          if (response.ok) {
             window.location.href = '/admin/uploads'
           } else {
-            alert(result.message || 'Could not deny');
+            alert('Could not deny');
           }
         } catch (error) {
           console.error('Error:', error);
