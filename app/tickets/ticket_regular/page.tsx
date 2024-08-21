@@ -88,7 +88,7 @@ export default function Premium() {
             <div className="min-h-screen flex items-center justify-center bg-[#08090F]">
                 <div className="w-full max-w-md p-4 rounded-md shadow-md bg-[#08090F] flex flex-col items-center gap-5">
                     <h1 className="text-2xl w-full text-center sm:text-3xl font-bold text-white mb-4 sm:mb-6">
-                        Purchase your <span className="text-purple-500">Regular ticket</span>
+                        Purchase your <span className="text-purple-500">Premium ticket</span>
                     </h1>
                     <Image 
                             src={'/ticket-types/premium.jpg'}
