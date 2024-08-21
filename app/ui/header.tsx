@@ -56,7 +56,15 @@ export default async function Header() {
                         </div>
                     </>
                 )}
-                {(session?.user.registrationNumber == process.env.ADMIN_1) ? (
+                {(
+                    session?.user.registrationNumber == process.env.ADMIN_1 || 
+                    session?.user.registrationNumber == process.env.ADMIN_2 || 
+                    session?.user.registrationNumber == process.env.ADMIN_3 || 
+                    session?.user.registrationNumber == process.env.ADMIN_4 || 
+                    session?.user.registrationNumber == process.env.ADMIN_5 || 
+                    session?.user.registrationNumber == process.env.ADMIN_6 
+
+                ) ? (
                     <div className="flex gap-3 items-center">
                         <Link href={'/admin/dashboard'} className="pl-4 pr-4 pb-1 pt-1 bg-slate-800 border-slate-600 border text-xs rounded">
                             Dashboard

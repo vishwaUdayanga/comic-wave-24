@@ -18,7 +18,18 @@ export default async function Page({
     const query = searchParams?.query || '';
     const currentPage = Number(searchParams?.page) || 1;
     const session = await getServerSession(authOptions);
-    if (!session || session.user.registrationNumber !== process.env.ADMIN_1) {
+    if (!session ) {
+      redirect('/login');
+    }
+
+    if (session?.user.registrationNumber == process.env.ADMIN_1 ||
+        session?.user.registrationNumber == process.env.ADMIN_2 || 
+        session?.user.registrationNumber == process.env.ADMIN_3 || 
+        session?.user.registrationNumber == process.env.ADMIN_4 || 
+        session?.user.registrationNumber == process.env.ADMIN_5 || 
+        session?.user.registrationNumber == process.env.ADMIN_6) {
+
+    } else {
         redirect('/login');
     }
 
