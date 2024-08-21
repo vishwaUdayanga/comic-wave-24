@@ -15,6 +15,8 @@ import { redirect } from "next/dist/server/api-utils";
 type FormValues = z.infer<typeof signInSchema>;
 
 export default function Login() {
+    const [isLoading, setIsLoading] = useState(false)
+    const [buttonText, setButtonText] = useState("Enter to ComicWave")
 
     const { control, handleSubmit, formState: { errors } } = useForm<FormValues>({
         resolver: zodResolver(signInSchema),
@@ -27,20 +29,30 @@ export default function Login() {
 
     
     const onSubmit = async (data: FormValues) => {
-        console.log(data);
-        var registrationNumber = data.registration_number;
-        var password = data.password;
-        const result = await signIn("credentials", {
-            redirect: false,
-            registration_number: registrationNumber,
-            password: password,
-        });
+        setIsLoading(true)
+        setButtonText('Loading...')
 
-        if (result?.error) {
-            alert('Enter correct credentials or activate your email address')
-        } else {
-            window.location.href = "/";
+        try {
+            var registrationNumber = data.registration_number;
+            var password = data.password;
+            const result = await signIn("credentials", {
+                redirect: false,
+                registration_number: registrationNumber,
+                password: password,
+            });
+
+            if (result?.error) {
+                alert('Enter correct credentials or activate your email address')
+            } else {
+                window.location.href = "/";
+            }
+        } catch(error) {
+
+        } finally {
+            setIsLoading(false)
+            setButtonText('Enter to ComicWave')
         }
+        
     };
     return (
         <>
@@ -124,8 +136,9 @@ export default function Login() {
                         <button
                             type="submit"
                             className="w-full bg-purple-500 text-white font-bold py-2 rounded-md hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center justify-center text-sm sm:text-base"
+                            disabled={isLoading}
                         >
-                            Enter to ComicWave
+                            {buttonText}
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                                 <path
                                     fillRule="evenodd"

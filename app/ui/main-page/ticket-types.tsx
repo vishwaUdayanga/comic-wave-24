@@ -19,7 +19,7 @@ export default function TicketTypes() {
                         />
                         <div className="regular-gradient p-6 text-end mt-0 md:mt-8 flex justify-end">
                             <div className="flex gap-5 mr-10">
-                                <p className="text-sm mt-2 text-slate-400 text-right"><span className="text-xl text-slate-50">LKR 800</span><br />For comic-con and E-sport event</p>
+                                <p className="text-sm mt-2 text-slate-400 text-right"><span className="text-xl text-slate-50">LKR 800</span><br />For Comic-Con and After Party</p>
                                 <Image 
                                     src={'/ticket-types/ticket.svg'}
                                     alt={'Ticket Types | Ticket Logo'}
@@ -44,7 +44,7 @@ export default function TicketTypes() {
                                     width={30}
                                     height={30}
                                 />
-                                <p className="text-sm mt-2 text-slate-400 text-left"><span className="text-xl text-slate-50">LKR 600</span><br />Only for comic-con</p>
+                                <p className="text-sm mt-2 text-slate-400 text-left"><span className="text-xl text-slate-50">---</span><br />--------</p>
                             </div>
                         </div>
                     </Link>

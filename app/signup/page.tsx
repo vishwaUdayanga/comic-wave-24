@@ -35,6 +35,9 @@ export default function Signup() {
         email_error: ''
     })
 
+    const [isLoading, setIsLoading] = useState(false)
+    const [buttonText, setButtonText] = useState("Verify account")
+
     useEffect(() => {
         if (state.error == 'Student error') {
             setMessage(prev => ({
@@ -53,6 +56,9 @@ export default function Signup() {
 
     const onSubmit = async (data: FormValues) => {
         try {
+            setIsLoading(true)
+            setButtonText('Loading...')
+
             const newState = await createStudent(state, data);
             setState(newState)
 
@@ -70,6 +76,9 @@ export default function Signup() {
                 error: 'Student error',
                 message: 'Either registration number or email is already taken.'
             })
+        } finally {
+            setIsLoading(false)
+            setButtonText('Verify account')
         }
     };
 
@@ -282,8 +291,9 @@ export default function Signup() {
                         <button
                             type="submit"
                             className="w-full bg-purple-500 text-white font-bold py-2 rounded-md hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center justify-center text-sm sm:text-base"
+                            disabled={isLoading}
                         >
-                            Verify account
+                            {buttonText}
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                                 <path
                                     fillRule="evenodd"

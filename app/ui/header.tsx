@@ -11,28 +11,30 @@ export default async function Header() {
         <div className="flex p-4 justify-center custom-dark-low w-full">
             <div className="flex w-full justify-between md:w-4/5">
                 <div className="flex align-middle gap-4">
-                    <Image
-                        src={'/header/header-logo.png'}
-                        alt={'Header | Logo'}
-                        width={130}
-                        height={130}
-                    />
+                    <Link href={'/'}>
+                        <Image
+                            src={'/header/header-logo.png'}
+                            alt={'Header | Logo'}
+                            width={130}
+                            height={130}
+                        />
+                    </Link>
                     <div className="flex gap-4 items-center">  
                         <div className="w-fit rounded bg-slate-800 p-2 border border-slate-600 gap-1 hidden sm:flex">
                             <Image 
-                                src={'/header/ticket-premium.jpg'}
+                                src={'/ticket-types/premium.jpg'}
                                 alt={'Ticket | Premium'}
                                 width={50}
                                 height={50}
                             />
                             <Image 
-                                src={'/header/ticket-regular.jpg'}
+                                src={'/ticket-types/regular.jpg'}
                                 alt={'Ticket | Regular'}
                                 width={50}
                                 height={50}
                             />
                         </div>
-                        <p className="text-xs hidden lg:block">Ticket price | <Link href={'/'}>Regular - LKR 600</Link> | <Link href={'/'}>Premium - LKR 800</Link></p>
+                        <p className="text-xs hidden lg:block">Ticket price | <Link href={'/tickets/ticket_regular'}>Premium - LKR 800</Link></p>
                     </div>
                 </div>
                 {(session) ? (

@@ -41,13 +41,21 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: 'Could not verify', found: false }, { status: 500 });
       }
 
+      var filePath = ''
+
+      if (ticketNumber == 1) {
+        filePath = 'public/ticket-types/premium.png'
+      } else {
+        filePath = 'public/ticket-types/regular.png'
+      }
+
       // Generate PDF
       const pdfDoc = await PDFDocument.create();
       const page = pdfDoc.addPage([600, 400]);
       const { width, height } = page.getSize();
 
       // Add image
-        const imagePath = path.join(process.cwd(), 'public/ticket-types/premium.png');
+        const imagePath = path.join(process.cwd(), filePath);
         const imageBytes = await fs.readFile(imagePath);
         const image = await pdfDoc.embedPng(imageBytes); 
         page.drawImage(image, {

@@ -33,6 +33,9 @@ type Upload = {
             <thead className="rounded-lg text-left text-sm font-normal">
               <tr>
                 <th scope="col" className="px-4 py-5 font-medium sm:pl-6 text-white">
+                  Ticket
+                </th>
+                <th scope="col" className="px-4 py-5 font-medium sm:pl-6 text-white">
                   Student ID
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium text-white">
@@ -55,6 +58,9 @@ type Upload = {
                   key={bought.studentId}
                   className="bg-slate-900 w-full border-b py-3 text-sm last-of-type:border-none "
                 >
+                  <td className="whitespace-nowrap py-3 pl-6 pr-3 text-white">
+                    {bought.id}
+                  </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3 text-white">
                     {bought.studentId}
                   </td>

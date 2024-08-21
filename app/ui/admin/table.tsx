@@ -99,12 +99,14 @@ type Upload = {
                     }
                   </td>
                   <td className="whitespace-nowrap px-3 py-3 text-white">
-                    {!upload.verified ? (
+                    {upload.type==1 ? !upload.verified ? (
                       <Link href={`/admin/view/${upload.studentId}`} className='pl-4 pr-4 pt-1 pb-1 text-white bg-blue-700 rounded'>
                         View
                       </Link>
                     ) : (
                       <></>
+                    ) : (
+                      <>View2</>
                     )}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3 text-white">

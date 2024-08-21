@@ -27,6 +27,9 @@ export default function Premium() {
         file_error: '',
     })
 
+    const [isLoading, setIsLoading] = useState(false)
+    const [buttonText, setButtonText] = useState("Upload your file")
+
     useEffect(() => {
         if (state.error == 'Upload error') {
             setMessage(prev => ({
@@ -37,7 +40,11 @@ export default function Premium() {
     }, [state])
 
     const onSubmit = async (data: FormValues) => {
+        setIsLoading(true)
+        setButtonText('Loading...')
         if (!data.file) {
+            setIsLoading(false)
+            setButtonText('Upload your file')
             return
         } 
 
@@ -71,6 +78,9 @@ export default function Premium() {
                 error: 'Upload error',
                 message: 'Could not upload the file'
             })
+        } finally {
+            setIsLoading(false)
+            setButtonText('Upload your file')
         }
     }
     return (
@@ -131,8 +141,9 @@ export default function Premium() {
                         <button
                             type="submit"
                             className="mt-5 w-full bg-purple-500 text-white font-bold py-2 rounded-md hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center justify-center text-sm sm:text-base"
+                            disabled={isLoading}
                         >
-                            Upload your file
+                            {buttonText}
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                                 <path
                                     fillRule="evenodd"

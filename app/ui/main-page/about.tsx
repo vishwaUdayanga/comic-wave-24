@@ -5,6 +5,12 @@ export default function About() {
                     <h1 className="text-3xl font-bold mt-5 z-10 text-center">About <span className="text-violet-600">COMIC Wave</span></h1>
                     <p className="text-sm mt-5 text-center text-slate-400 z-10"> The “ComicWave 24” combines an E-sport event and an on-premise
                     comic con decided to be held at the end of September. It comprises of several interactive activities such as Art competition, Escape room, E-sport tournament, Interactive games, DJ and so on.</p>
+                    <a
+                        href="mailto:comic.wave.event@gmail.com?subject=Contact%20ComicWave"
+                        className="pl-16 pr-16 pb-3 pt-3 custom-purple-low text-xs rounded mt-5 text-center inline-block"
+                        >
+                        Contact ComicWave
+                    </a>
                 </div>
         </section>
     )

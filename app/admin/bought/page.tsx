@@ -26,7 +26,7 @@ export default async function Page({
 
     return (
         <div className="min-h-screen flex w-full flex-col">
-            <h1 className="text-4xl text-indigo-500 font-bold mt-6 text-center">Slip Uploads</h1>
+            <h1 className="text-4xl text-indigo-500 font-bold mt-6 text-center">Bought</h1>
           <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
             <Search placeholder="Search invoices..." />
           </div>

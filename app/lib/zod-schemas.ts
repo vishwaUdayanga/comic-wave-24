@@ -63,9 +63,9 @@ export const uploadFileSchema = z.object({
       message: 'File size should be less than 5MB',
     }).refine((fileList: FileList) => {
       const file = fileList[0];
-      return file ? ['image/png'].includes(file.type) : false; // Allowed types
+      return file ? ['image/jpeg', 'image/png'].includes(file.type) : false; // Allowed types
     }, {
-      message: 'Only PNG images are allowed',
+      message: 'Only JPG, JPEG, and PNG images are allowed',
     }),
 });
 
