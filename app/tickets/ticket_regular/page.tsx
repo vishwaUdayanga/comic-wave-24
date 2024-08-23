@@ -96,6 +96,12 @@ export default function Premium() {
                             width={390}
                             height={390}
                     />
+                    <div className='p-4 border border-slate-600 rounded-md'>
+                        <p className='text-white text-sm'>Account number : 73031923</p>
+                        <p className='text-white text-sm'>Account name : M/S SLIIT COMPUTING INTERACTIVE</p>
+                        <p className='text-white text-sm'>Bank : Bank of Ceylon Kollupitiya</p>
+                        <p className='text-white text-sm'>Address : BOC Merchant Tower, No 28 ST Michael Road, Colombo 03 003</p>
+                    </div>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="mb-4">
                             <label htmlFor="registration" className="block text-gray-400 mb-2 text-sm sm:text-base">
