@@ -101,6 +101,7 @@ export default function Premium() {
                         <p className='text-white text-sm'>Account name : M/S SLIIT COMPUTING INTERACTIVE</p>
                         <p className='text-white text-sm'>Bank : Bank of Ceylon Kollupitiya</p>
                         <p className='text-white text-sm'>Address : BOC Merchant Tower, No 28 ST Michael Road, Colombo 03 003</p>
+                        <p className='text-purple-500 text-lg font-bold'>Make sure you only pay for yourself. (One ticket for only one student)</p>
                     </div>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="mb-4">
