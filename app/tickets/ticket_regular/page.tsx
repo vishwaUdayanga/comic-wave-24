@@ -101,7 +101,13 @@ export default function Premium() {
                         <p className='text-white text-sm'>Account name : M/S SLIIT COMPUTING INTERACTIVE</p>
                         <p className='text-white text-sm'>Bank : Bank of Ceylon Kollupitiya</p>
                         <p className='text-white text-sm'>Address : BOC Merchant Tower, No 28 ST Michael Road, Colombo 03 003</p>
-                        <p className='text-purple-500 text-lg font-bold'>Make sure you only pay for yourself. (One ticket for only one student)</p>
+                        <p className='text-purple-500 text-lg font-bold'>Make sure you only pay for yourself. (One ticket for only one student) </p>
+                    </div>
+                    <div className='p-4 border border-slate-600 rounded-md'>
+                        <p className='text-purple-500 text-lg font-bold'>The ticket will be sent via an email after verification.</p>
+                    </div>
+                    <div className='p-4 border border-slate-600 rounded-md'>
+                        <p className='text-white text-sm'>If the tickets are to be purchased physically, the payment must be handed over to the SIS treasurer or the informed people only. The student must be registered in the site in prior in order to get the tickets.</p>
                     </div>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="mb-4">
