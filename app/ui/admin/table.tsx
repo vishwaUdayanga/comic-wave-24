@@ -77,6 +77,9 @@ type Upload = {
                 <th scope="col" className="px-3 py-5 font-medium text-white">
                   Deny
                 </th>
+                <th scope="col" className="px-3 py-5 font-medium text-white">
+                  View slip
+                </th>
               </tr>
             </thead>
             <tbody className="">
@@ -115,6 +118,11 @@ type Upload = {
                     ) : (
                       <></>
                     )}
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-3 text-white">
+                    <Link href={`/admin/view-slip/${upload.studentId}`} className='pl-4 pr-4 pt-1 pb-1 text-white bg-blue-700 rounded'>
+                      View Slip
+                    </Link>
                   </td>
                 </tr>
               ))}
