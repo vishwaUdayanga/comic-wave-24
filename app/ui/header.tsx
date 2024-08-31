@@ -13,7 +13,7 @@ export default async function Header() {
                 <div className="flex align-middle gap-4">
                     <Link href={'/'}>
                         <Image
-                            src={'/header/header-logo.png'}
+                            src={'/header/logo.png'}
                             alt={'Header | Logo'}
                             width={130}
                             height={130}
@@ -62,7 +62,9 @@ export default async function Header() {
                     session?.user.registrationNumber == process.env.ADMIN_3 || 
                     session?.user.registrationNumber == process.env.ADMIN_4 || 
                     session?.user.registrationNumber == process.env.ADMIN_5 || 
-                    session?.user.registrationNumber == process.env.ADMIN_6 
+                    session?.user.registrationNumber == process.env.ADMIN_6 ||
+                    session?.user.registrationNumber == process.env.ADMIN_7 ||
+                    session?.user.registrationNumber == process.env.ADMIN_8 
 
                 ) ? (
                     <div className="flex gap-3 items-center">

@@ -17,7 +17,9 @@ export default async function View({ params }: { params: { id: string } }) {
         session?.user.registrationNumber == process.env.ADMIN_3 || 
         session?.user.registrationNumber == process.env.ADMIN_4 || 
         session?.user.registrationNumber == process.env.ADMIN_5 || 
-        session?.user.registrationNumber == process.env.ADMIN_6) {
+        session?.user.registrationNumber == process.env.ADMIN_6 ||
+        session?.user.registrationNumber == process.env.ADMIN_7 ||
+        session?.user.registrationNumber == process.env.ADMIN_8) {
 
     } else {
         redirect('/login');

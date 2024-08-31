@@ -299,3 +299,35 @@ export async function fetchStudentsByRegistrationNumber(
   }
 }
 
+export async function fetchPhysicalBoughtCount() {
+  try {
+
+    const count = await prisma.bought.count({
+      where: {
+        type: 1
+      }
+    });
+
+    return count;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch uploads.');
+  }
+}
+
+export async function fetchOnlineCount() {
+  try {
+
+    const count = await prisma.student.count({
+      where: {
+        verifiedByAdmin: true
+      }
+    });
+
+    return count;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch uploads.');
+  }
+}
+

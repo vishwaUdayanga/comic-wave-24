@@ -6,6 +6,7 @@ import Search from '@/app/ui/admin/search';
 import BoughtTable from '@/app/ui/admin/bought-table';
 import { fetchBought } from '@/app/lib/actions';
 import Pagination from '@/app/ui/admin/pagination';
+import BoughtCount from '@/app/ui/admin/bought-count';
 
 export default async function Page({
         searchParams,
@@ -27,7 +28,9 @@ export default async function Page({
         session?.user.registrationNumber == process.env.ADMIN_3 || 
         session?.user.registrationNumber == process.env.ADMIN_4 || 
         session?.user.registrationNumber == process.env.ADMIN_5 || 
-        session?.user.registrationNumber == process.env.ADMIN_6) {
+        session?.user.registrationNumber == process.env.ADMIN_6 ||
+        session?.user.registrationNumber == process.env.ADMIN_7 ||
+        session?.user.registrationNumber == process.env.ADMIN_8) {
 
     } else {
         redirect('/login');
@@ -37,11 +40,12 @@ export default async function Page({
 
     return (
         <div className="min-h-screen flex w-full flex-col">
-            <h1 className="text-4xl text-indigo-500 font-bold mt-6 text-center">Bought</h1>
+          <h1 className="text-4xl text-indigo-500 font-bold mt-6 text-center">Bought</h1>
+          <BoughtCount />
           <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
             <Search placeholder="Search invoices..." />
           </div>
-          <BoughtTable query={query} currentPage={currentPage} />
+          <BoughtTable query={query} currentPage={currentPage}/>
           <div className="mt-5 flex w-full justify-center">
             <Pagination totalPages={totalPages} />
           </div>

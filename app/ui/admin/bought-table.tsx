@@ -26,10 +26,10 @@ type Upload = {
   const boughts = await fetchBoughtByRegistrationNumber(query, currentPage);
 
   return (
-    <div className="mt-6 flow-root">
+    <div className="mt-6 flow-root w-full">
       <div className="inline-block min-w-full align-middle">
         <div className="rounded-lg  p-2 md:pt-0">
-          <table className=" text-gray-900 md:table bg-violet-800">
+          <table className=" text-gray-900 w-full bg-violet-800">
             <thead className="rounded-lg text-left text-sm font-normal">
               <tr>
                 <th scope="col" className="px-4 py-5 font-medium sm:pl-6 text-white">
