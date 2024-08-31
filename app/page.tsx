@@ -4,6 +4,7 @@ import Link from "next/link";
 import TicketTypes from "./ui/main-page/ticket-types";
 import ESport from "./ui/main-page/e-sports";
 import About from "./ui/main-page/about";
+import Sponsors from "./ui/main-page/sponsors";
  
 
 export default async function Home() {
@@ -37,6 +38,7 @@ export default async function Home() {
       </main>
       <TicketTypes />
       <ESport />
+      <Sponsors />
       <About />
     </>
   );
