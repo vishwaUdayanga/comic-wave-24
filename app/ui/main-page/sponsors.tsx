@@ -25,6 +25,14 @@ export default function Sponsors() {
                                         height={250}
                                     />
                                 </div>
+                                <div className="border border-slate-800 p-10 flex items-center justify-center">
+                                    <Image 
+                                        src={'/sponsors/sponsor4.png'}
+                                        alt={'Pepsi'}
+                                        width={250}
+                                        height={250}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>

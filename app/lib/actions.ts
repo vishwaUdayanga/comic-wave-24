@@ -299,7 +299,7 @@ export async function fetchStudentsByRegistrationNumber(
   }
 }
 
-export async function fetchPhysicalBoughtCount() {
+export async function fetchBoughtCount() {
   try {
 
     const count = await prisma.bought.count({
@@ -315,7 +315,7 @@ export async function fetchPhysicalBoughtCount() {
   }
 }
 
-export async function fetchOnlineCount() {
+export async function fetchPhysicalCount() {
   try {
 
     const count = await prisma.student.count({
